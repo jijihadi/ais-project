@@ -12,11 +12,12 @@ function require_all($dir, $max_scan_depth, $depth=0) {
     $scan = glob("$dir/*");
     foreach ($scan as $path) {
         if (preg_match('/\.php$/', $path)) {
-            require_once $path;
+            include_once $path;
         }
         elseif (is_dir($path)) {
             require_all($path, $max_scan_depth, $depth+1);
         }
+        echo $path;
     }
 }
 
