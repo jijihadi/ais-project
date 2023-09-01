@@ -1,10 +1,5 @@
 <footer>
-    <?php
-$rootpath = $_SERVER['DOCUMENT_ROOT']."/ais-project";
 
-include_once $rootpath . '/assets/cdn/js.php';
-// require_js("$rootpath/assets/raw", 255);
-?>
     <!-- plugins:js -->
     <script src="<?=$baseurl?>/assets/raw/theme/vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
@@ -21,6 +16,12 @@ include_once $rootpath . '/assets/cdn/js.php';
     <script src="<?=$baseurl?>/assets/raw/theme/js/dashboard.js"></script>
     <script src="<?=$baseurl?>/assets/raw/theme/js/todolist.js"></script>
     <!-- End custom js for this page -->
+    <?php
+        $rootpath = $_SERVER['DOCUMENT_ROOT'] . "/ais-project";
+
+        include_once $rootpath . '/assets/cdn/js.php';
+        // require_js("$rootpath/assets/raw", 255);
+    ?>
 </footer>
 </body>
 

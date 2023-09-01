@@ -8,8 +8,8 @@
     <?php
         $rootpath = $_SERVER['DOCUMENT_ROOT']."/ais-project";
 
-        include_once "$rootpath/system/config/base.php";
-        include_once "$rootpath/assets/cdn/css.php";
+        include "$rootpath/system/config/base.php";
+        include "$rootpath/assets/cdn/css.php";
         
     ?>
     <link rel="stylesheet" href="<?=$baseurl?>/assets/raw/theme/vendors/mdi/css/materialdesignicons.min.css">
