@@ -11,12 +11,12 @@ if (isset($_POST['login'])) {
         // get user data
         $user = mysqli_fetch_assoc($result);
         // set session
-        $_SESSION['user'] = [
+        setSessionData('alert', [
             'id' => $user['id'],
             'username' => $user['username'],
             'name' => $user['name'],
             'role' => $user['role'],
-        ];
+        ]);
         header("location: $baseurl/app/pages/dashboard/index.php");
     } else {
         // return with session error message error

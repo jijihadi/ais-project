@@ -21,7 +21,6 @@ if (isset($_SESSION['user'])) {
                         <h4>Digital General Consent App</h4>
                         <h6 class="font-weight-light">Sign in to continue.</h6>
                         <?php
-
                         if (isset($_SESSION['error']['login'])) {
                             $error = '<div id="login-error"';
                             $error .= '<div class="alert alert-danger alert-dismissible fade show" role="alert">';
@@ -30,6 +29,7 @@ if (isset($_SESSION['user'])) {
                             $error .= '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
                             $error .= '</div>';
                             echo $error;
+                            unset($_SESSION['error']);
                         }
                         ?>
                         <form class="pt-3" action="do-login.php" method="post">

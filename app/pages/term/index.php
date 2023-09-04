@@ -4,7 +4,7 @@
 isLogin();
 
 // get data from database
-$patients = all('patients');
+$terms = all('terms');
 ?>
 <!-- Main body start -->
 <div class="container-scroller">
@@ -27,7 +27,7 @@ $patients = all('patients');
                     </nav>
                     <h3 class="page-title">
                         <button class="btn btn-primary btn-xs">
-                            <a href="<?=routes('pasien/add')?>" class="btn btn-primary btn-sm">
+                            <a href="<?=routes('term/add')?>" class="btn btn-primary btn-sm">
                                 <i class="mdi mdi-plus"></i>
                                 Tambah Data
                             </a>
@@ -58,27 +58,24 @@ $patients = all('patients');
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Nomor Rekam Medik</th>
-                                            <th>Nama</th>
-                                            <th>TTL</th>
-                                            <th>Kontak</th>
+                                            <th>Nama Term</th>
+                                            <th>Isi</th>
+                                            <th>Verifikasi</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
                                         $no = 1;
-                                        foreach ($patients as $patient) {
-                                            $birth = $patient['birthplace'].", ".toIndoDate($patient['birthdate']);
+                                        foreach ($terms as $term) {
                                             echo "<tr>";
                                             echo "<td>$no</td>";
-                                            echo "<td>$patient[medical_record]</td>";
-                                            echo "<td>$patient[name]</td>";
-                                            echo "<td>$birth</td>";
-                                            echo "<td>$patient[phone]</td>";
+                                            echo "<td>$term[head]</td>";
+                                            echo "<td>".toShorten($term['content'], 10)."</td>";
+                                            echo "<td>$term[verification]</td>";
                                             echo "<td>";
-                                            echo "<a href='".routes('pasien/edit',$patient['id'])."' class='btn btn-warning btn-sm mx-3'>Edit</a>";
-                                            echo "<a onclick='deleteConfirmation(event)' href='".routes('pasien/delete',$patient['id'])."' class='btn btn-danger btn-sm'>Hapus</a>";
+                                            echo "<a href='".routes('term/edit',$term['id'])."' class='btn btn-warning btn-sm mx-3'>Edit</a>";
+                                            echo "<a onclick='deleteConfirmation(event)' href='".routes('term/delete',$term['id'])."' class='btn btn-danger btn-sm'>Hapus</a>";
                                             echo "</td>";
                                             echo "</tr>";
                                             $no++;

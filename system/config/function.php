@@ -25,13 +25,32 @@ function isLogin(){
         header("Location: ".routes('login'));
     }
 }
+// set session 
+function setSessionData($key, $value){
+    $_SESSION[$key] = $value;
+}
+// get session
+function getSessionData($key){
+    return $_SESSION[$key];
+}   
 // get uri based on index
 function getUri($index){
     $uri = explode("/", $_SERVER['REQUEST_URI']);
     if(isset($uri[$index])){
+        $uri[$index] = str_replace(".php", "", $uri[$index]);
         return $uri[$index];
     }
     return null; // or any default value
+}
+// make function generateRandomString
+function generateRandomString($length = 10) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; ++$i) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
 }
 // view helper
 function isActive($param){
@@ -42,9 +61,40 @@ function isActive($param){
     }
     return "";
 }
+function isSelected($param, $value){
+    if($param == $value){
+        return "selected";
+    }
+    return "";
+}
+// make fucntion need hidden
+function needHidden($param, $value){
+
+    if($param === $value){
+        return 'd-none';
+    }
+    return '';
+}
+// make function is value in array
+function inArray($value, $array) {
+    return in_array($value, $array);
+}
+// make function to unset array based on index vlaue
+function cleanseArray($array, $index, $value){
+    foreach ($array as $key => $arr) {
+        if ($arr[$index] === $value) {
+            print_r([$array, $key, $value]);
+            unset($array[$key]);
+        }
+    }
+}
+
 // text helper
 function toTitle($string){
     return ucwords(strtolower($string));
+}
+function toPlainText($string){
+    return strip_tags($string);
 }
 
 function toIndoDate($date)
@@ -74,14 +124,22 @@ function toIndoMonth($month)
 
 function toShorten($text, $count)
 {
-    $text = strip_tags($text);
-    if (strlen($text) > $count) {
-        $text = substr($text, 0, $count);
-        $text = substr($text, 0, strrpos($text, " "));
-        $etc = " ...";
-        $text = $text . $etc;
+    if (!is_string($text)) {
+        return $text;
     }
-    return $text;
+    
+    if (!is_int($count) || $count <= 0) {
+        return $text;
+    }
+    
+    $text = trim($text);
+    
+    $words = explode(" ", $text);
+    if ($count >= count($words)) {
+        return $text;
+    }
+    $words[$count - 1] = "...";
+    $shortenedText = implode(" ", array_slice($words, 0, $count));
+    return $shortenedText;
 }
-
 ?>

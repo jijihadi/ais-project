@@ -1,0 +1,7 @@
+input[type="text"]{
+    border-radius: 20px;
+}
+.ck-editor__editable_inline {
+	padding: 0 25px !important;
+	min-height: 250px;
+}
