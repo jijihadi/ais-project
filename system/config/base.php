@@ -46,6 +46,7 @@ function routes($param = null, $id=null)
         'form/do-fill-2' => '/app/pages/form/action/do-fill-2.php',
         'form/do-fill-3' => '/app/pages/form/action/do-fill-3.php',
         'form/do-fill-4' => '/app/pages/form/action/do-fill-4.php',
+        'form/done' => '/app/pages/form/done.php',
         'form/add' => '/app/pages/form/add.php',
         'form/input' => '/app/pages/form/input.php',
         'form/edit' => '/app/pages/form/edit.php',

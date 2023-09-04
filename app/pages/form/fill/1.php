@@ -70,7 +70,7 @@ $formdata = getSessionData('form');
                                 </div>
                                 <input type="hidden" name="patient_id">
                                 <div class="form-group">
-                                    <label for="exampleInputName1">Nomor Rekam Medis <?php print_r(getUri(7))?></label> 
+                                    <label for="exampleInputName1">Nomor Rekam Medis</label> 
                                     <input type="text" name="medical_record" class="form-control" id="exampleInputName1"
                                         placeholder="Nomor rekam medis" onchange="fillPasienWali(this)" value="">
                                 </div>

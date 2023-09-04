@@ -3,7 +3,7 @@
           <a class="navbar-brand brand-logo" href="<?=routes('dashboard')?>"><img src="<?= $baseurl.'/assets/raw/theme/images/logo.svg'?>" alt="logo" /></a>
           <a class="navbar-brand brand-logo-mini" href="<?=routes('dashboard')?>"><img src="<?= $baseurl.'/assets/raw/theme/images/logo-mini.svg'?>"" alt="logo" /></a>
         </div>
-        <div class="navbar-menu-wrapper d-flex align-items-stretch <?=needHidden(getUri(5),'fill')?>">
+        <div class="navbar-menu-wrapper d-flex align-items-stretch <?=needHidden(getUri(5),'fill')?> <?=needHidden(getUri(5),'done')?>">
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
             <span class="mdi mdi-menu"></span>
           </button>
