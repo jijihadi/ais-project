@@ -26,6 +26,7 @@ function routes($param = null, $id=null)
     $routes = [
         // Login
         'login' => '/app/pages/login/index.php',
+        'do-login' => '/app/pages/login/do-login.php',
         'logout' => '/app/pages/login/do-logout.php',
         // Dashboard
         'dashboard' => '/app/pages/dashboard/index.php',

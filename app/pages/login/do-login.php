@@ -11,7 +11,7 @@ if (isset($_POST['login'])) {
         // get user data
         $user = mysqli_fetch_assoc($result);
         // set session
-        setSessionData('alert', [
+        setSessionData('user', [
             'id' => $user['id'],
             'username' => $user['username'],
             'name' => $user['name'],

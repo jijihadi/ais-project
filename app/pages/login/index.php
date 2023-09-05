@@ -32,7 +32,7 @@ if (isset($_SESSION['user'])) {
                             unset($_SESSION['error']);
                         }
                         ?>
-                        <form class="pt-3" action="do-login.php" method="post">
+                        <form class="pt-3" action="<?=routes('do-login')?>" method="post">
                             <div class="form-group">
                                 <input type="text" name="username" class="form-control form-control-lg"
                                     id="exampleInputEmail1" placeholder="Username">
