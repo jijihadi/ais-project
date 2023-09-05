@@ -23,13 +23,13 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
     <!-- Jquery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script> -->
     <!-- Datatables -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/v/bs5/dt-1.13.6/date-1.5.1/fh-3.4.0/r-2.5.0/sp-2.2.0/datatables.min.js">
@@ -47,70 +47,91 @@
     <!-- Own custom js -->
     <script>
     $(document).ready(function() {
-        $('#myTable').DataTable();
-        $('.my-select2').select2();
-        $("#datepicker").flatpickr();
-        ClassicEditor.create(document.querySelector('#editor'), {
-            toolbar: []
-        });
-        ClassicEditor.create(document.querySelector('#editor2'), {
-            toolbar: []
-        });
-        ClassicEditor.create(document.querySelector('#editor-bullet'), {
-            toolbar: ['bulletedList', ]
-        });
+        // check if #mytable exist
+        if ($('#myTable').length) {
+            $('#myTable').DataTable({
+                "order": [
+                    [0, "desc"]
+                ]
+            });
+        }
+        // check if myselect2 exist
+        if ($('.my-select2').length) {
+            $('.my-select2').select2();
+        }
+        if ($('#datepicker').length) {
+            $('#datepicker').datepicker({
+                dateFormat: 'dd-mm-yy'
+            });
+        }
+        if ($('#editor').length) {
+            ClassicEditor.create(document.querySelector('#editor'), {
+                toolbar: []
+            });
+            ClassicEditor.create(document.querySelector('#editor2'), {
+                toolbar: []
+            });
+            ClassicEditor.create(document.querySelector('#editor-bullet'), {
+                toolbar: ['bulletedList', ]
+            });
+        }
     });
     // start signature
-    var signaturePad = new SignaturePad(document.getElementById('signature-pad-pasien'), {
-        backgroundColor: 'rgba(255, 255, 255, 0)',
-        penColor: 'rgb(0, 0, 0)'
-    });
-    document.getElementById('clear-pasien').addEventListener('click', function(event) {
-        signaturePad.clear();
-    });
+    if ($('#signature-pad-pasien').length) {
+        var canvas = document.getElementById('signature-pad-pasien');
+        var signaturePad = new SignaturePad(canvas, {
+            backgroundColor: 'rgba(255, 255, 255, 0)',
+            penColor: 'rgb(0, 0, 0)'
+        });
+        document.getElementById('clear-pasien').addEventListener('click', function(event) {
+            signaturePad.clear();
+        });
+        document.getElementById('save-pasien').addEventListener('click', function(event) {
+            if (signaturePad.isEmpty()) {
+                swal("Butuh tanda tangan pasien.");
+            } else if (signaturePad2.isEmpty()) {
+                swal("Butuh tanda tangan Wali.");
+            } else {
+                var dataURL = signaturePad.toDataURL();
+                document.getElementById('signed-pasien').value = dataURL;
+            }
+        });
 
-    var signaturePad2 = new SignaturePad(document.getElementById('signature-pad-wali'), {
-        backgroundColor: 'rgba(255, 255, 255, 0)',
-        penColor: 'rgb(0, 0, 0)'
-    });
-    document.getElementById('clear-wali').addEventListener('click', function(event) {
-        signaturePad2.clear();
-    });
+        var signaturePad2 = new SignaturePad(document.getElementById('signature-pad-wali'), {
+            backgroundColor: 'rgba(255, 255, 255, 0)',
+            penColor: 'rgb(0, 0, 0)'
+        });
+        document.getElementById('clear-wali').addEventListener('click', function(event) {
+            signaturePad2.clear();
+        });
+        document.getElementById('save-wali').addEventListener('click', function(event) {
+            if (signaturePad.isEmpty()) {
+                swal("Butuh tanda tangan wali.");
+            } else {
+                var dataURL = signaturePad.toDataURL();
+                document.getElementById('signed-wali').value = dataURL;
+            }
+        });
 
-    var signaturePad3 = new SignaturePad(document.getElementById('signature-pad-petugas'), {
-        backgroundColor: 'rgba(255, 255, 255, 0)',
-        penColor: 'rgb(0, 0, 0)'
-    });
-    document.getElementById('clear-petugas').addEventListener('click', function(event) {
-        signaturePad3.clear();
-    });
+        var signaturePad3 = new SignaturePad(document.getElementById('signature-pad-petugas'), {
+            backgroundColor: 'rgba(255, 255, 255, 0)',
+            penColor: 'rgb(0, 0, 0)'
+        });
+        document.getElementById('clear-petugas').addEventListener('click', function(event) {
+            signaturePad3.clear();
+        });
+        document.getElementById('save-petugas').addEventListener('click', function(event) {
+            if (signaturePad.isEmpty()) {
+                swal("Butuh tanda tangan petugas.");
+            } else {
+                var dataURL = signaturePad.toDataURL();
+                document.getElementById('signed-petugas').value = dataURL;
+            }
+        });
 
-    document.getElementById('save-pasien').addEventListener('click', function(event) {
-        if (signaturePad.isEmpty()) {
-            swal("Butuh tanda tangan pasien.");
-        } else {
-            var dataURL = signaturePad.toDataURL();
-            document.getElementById('signed-pasien').value = dataURL;
-        }
-    });
 
-    document.getElementById('save-wali').addEventListener('click', function(event) {
-        if (signaturePad.isEmpty()) {
-            swal("Butuh tanda tangan wali.");
-        } else {
-            var dataURL = signaturePad.toDataURL();
-            document.getElementById('signed-wali').value = dataURL;
-        }
-    });
+    }
 
-    document.getElementById('save-petugas').addEventListener('click', function(event) {
-        if (signaturePad.isEmpty()) {
-            swal("Butuh tanda tangan petugas.");
-        } else {
-            var dataURL = signaturePad.toDataURL();
-            document.getElementById('signed-petugas').value = dataURL;
-        }
-    });
 
     // end signature
     function deleteConfirmation(ev) {
