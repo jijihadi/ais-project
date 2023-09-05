@@ -57,6 +57,11 @@ function routes($param = null, $id=null)
         'submit' => '/app/pages/form/submit.php',
         // Pegawai
         'pegawai' => '/app/pages/pegawai/index.php',
+        'pegawai/add' => '/app/pages/pegawai/add.php',
+        'pegawai/input' => '/app/pages/pegawai/input.php',
+        'pegawai/edit' => '/app/pages/pegawai/edit.php',
+        'pegawai/update' => '/app/pages/pegawai/update.php',
+        'pegawai/delete' => '/app/pages/pegawai/delete.php',
         // Consent
         'term' => '/app/pages/term/index.php',
         'term/add' => '/app/pages/term/add.php',

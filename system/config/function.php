@@ -121,6 +121,10 @@ function toIndoMonth($month)
     $result = $BulanIndo[(int) $bulan - 1];
     return ($result);
 }
+function toDbDate($string)
+{
+    return date('Y-m-d', strtotime($string));
+}
 
 function toShorten($text, $count)
 {

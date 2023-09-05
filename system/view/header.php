@@ -21,7 +21,8 @@
     <!-- Select2 -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- Date -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/airbnb.css">
     <!-- Custom own css -->
     <!-- <link rel="<?= "$baseurl/assets/raw.main.css"?>" rel="stylesheet"> -->
     <!-- Favicon -->
@@ -84,7 +85,7 @@
         position: absolute;
         line-height: 1.4em;
         left: -90px;
-        color:#07cdae;
+        color: #07cdae;
     }
 
     .down .detail {
@@ -130,7 +131,6 @@
     .highlighted {
         color: #b66dff;
     }
-    
     </style>
 </head>
 
