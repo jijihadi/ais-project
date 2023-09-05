@@ -106,13 +106,13 @@ $formdata = getSessionData('form');
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputCity1">Alamat</label>
-                                    <textarea name="address" id="editor"></textarea>
+                                    <textarea name="address" id="editor-pasien"></textarea>
                                 </div>
                                 <p class="card-description"> Data Wali </p>
                                 <input type="hidden" name="guardian_id">
                                 <div class="form-group">
                                     <label for="exampleInputPassword4">Hubungan</label>
-                                    <select class="form-control my-select2" name="relation" id="hubungan-wali">
+                                    <select class="form-control my-select2" name="relation" id="relation">
                                         <option value="-" selected>Pilih hubungan kekeluargaan</option>
                                         <option value="ayah">Ayah</option>
                                         <option value="ibu">Ibu</option>
@@ -126,14 +126,14 @@ $formdata = getSessionData('form');
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail3">Nomor Telfon Wali</label>
-                                    <input type="text" name="guardian_phone" class="form-control" id=""
+                                    <input type="text" name="guardian_phone" class="form-control" id="phone-wali"
                                         placeholder="Nomor Telfon">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputCity1">Alamat Wali</label>
-                                    <textarea name="guardian_address" id="editor2"></textarea>
+                                    <textarea name="guardian_address" id="editor-wali"></textarea>
                                 </div>
-                                <button action="<?=routes('form/fill')?>" class="btn btn-light">Back</button>
+                                <a href="<?=routes('form/fill')?>" onclick="this.preventDefault()" class="btn btn-light">Back</a>
                                 <button  type="submit" class="btn btn-gradient-primary me-2">Next</button>
                             </form>
                         </div>

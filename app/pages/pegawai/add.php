@@ -34,7 +34,7 @@ isLogin();
                                 <div class="form-group">
                                     <label for="exampleInputName1">Nomor Pegawai</label>
                                     <input type="text" name="employee_number" class="form-control" id="exampleInputName1"
-                                        placeholder="Nomor pegawai">
+                                        placeholder="Nomor pegawai" onchange="$('#username_baru').val(this.value)">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail3">Pangkat Depan</label>
@@ -74,7 +74,7 @@ isLogin();
                                 <p class="card-description"> Data Login Pegawai </p>
                                 <div class="form-group">
                                     <label for="exampleInputEmail3">Username Pegawai</label>
-                                    <input type="text" name="username_baru" class="form-control" id="exampleInputEmail3"
+                                    <input type="text" name="username_baru" class="form-control" id="username_baru" readonly
                                         placeholder="username sama dengan employee number">
                                 </div>
                                 <div class="form-group">

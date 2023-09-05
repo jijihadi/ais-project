@@ -21,18 +21,13 @@
     <!-- Select2 -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- Date -->
-    <link href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css" rel="stylesheet">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css" rel="stylesheet"> -->
     <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/airbnb.css">
     <!-- Custom own css -->
     <!-- <link rel="<?= "$baseurl/assets/raw.main.css"?>" rel="stylesheet"> -->
     <!-- Favicon -->
     <link rel="stylesheet" href="<?=$baseurl?>/assets/raw/theme/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="<?=$baseurl?>/assets/raw/theme/vendors/css/vendor.bundle.base.css">
-    <!-- endinject -->
-    <!-- Plugin css for this page -->
-    <!-- End plugin css for this page -->
-    <!-- inject:css -->
-    <!-- endinject -->
     <!-- Layout styles -->
     <link rel="stylesheet" href="<?=$baseurl?>/assets/raw/theme/css/style.css">
 

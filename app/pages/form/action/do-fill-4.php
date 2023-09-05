@@ -5,7 +5,7 @@ include_once '../../../../system/config/base.php';
 
 // return all request
 $post = $_POST;
-
+// return var_dump($post);
 // put data to session first if session exist
 if (isset($_SESSION['form'])) {
     $post = array_merge($_SESSION['form'], $post);
@@ -75,7 +75,7 @@ if (empty($medical_record)) {
 $form_id = find('forms', 'token="' . getUri(7) . '"');
 // set form data
 $form['form_id'] = $form_id['id'];
-$form['verification'] = $_SESSION['form']['verification'];
+$form['verification'] = json_encode($_SESSION['form']['verification']);
 $form['patient_id'] = $_SESSION['form']['patient_id'];
 $form['guardian_id'] = $_SESSION['form']['guardian_id'];
 $form['employee_id'] = $_SESSION['form']['employee_id'];
@@ -84,7 +84,7 @@ $form['guardian_sign'] = $_SESSION['form']['signed-wali'];
 $form['employee_sign'] = $_SESSION['form']['signed-petugas'];
 $form['inputdate'] = date("Y-m-d H:i:s");
 $form['inputby'] = $_SESSION['user']['id'];
-$form['content'] = json_encode($_SESSION['form']);
+$form['agree'] = json_encode($_SESSION['form']['agree']);
 
 if (validate($form)) {
     // input data to table forms using mysqli function

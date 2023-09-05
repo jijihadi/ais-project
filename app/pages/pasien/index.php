@@ -79,6 +79,7 @@ $patients = all('patients');
                                             echo "<td>";
                                             echo "<a href='".routes('pasien/edit',$patient['id'])."' class='btn btn-warning btn-sm mx-3'>Edit</a>";
                                             echo "<a onclick='deleteConfirmation(event)' href='".routes('pasien/delete',$patient['id'])."' class='btn btn-danger btn-sm'>Hapus</a>";
+                                            echo "<a href='".routes('form/preview-new',$patient['id'])."' class='btn btn-info btn-sm mx-3'>Cek General Consent Terbaru</a>";
                                             echo "</td>";
                                             echo "</tr>";
                                             $no++;

@@ -30,6 +30,8 @@ function routes($param = null, $id=null)
         'logout' => '/app/pages/login/do-logout.php',
         // Dashboard
         'dashboard' => '/app/pages/dashboard/index.php',
+        // ajax
+        'ajax-pasien-wali' => '/app/pages/ajax/ajax-pasien-wali.php',
         // Pasien
         'pasien' => '/app/pages/pasien/index.php',
         'pasien/add' => '/app/pages/pasien/add.php',
@@ -48,6 +50,7 @@ function routes($param = null, $id=null)
         'form/do-fill-3' => '/app/pages/form/action/do-fill-3.php',
         'form/do-fill-4' => '/app/pages/form/action/do-fill-4.php',
         'form/done' => '/app/pages/form/done.php',
+        'form/preview-new' => '/app/pages/form/preview.php',
         'form/add' => '/app/pages/form/add.php',
         'form/input' => '/app/pages/form/input.php',
         'form/edit' => '/app/pages/form/edit.php',

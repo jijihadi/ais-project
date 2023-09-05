@@ -29,7 +29,7 @@
     <!-- Jquery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script> 
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <!-- Datatables -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/v/bs5/dt-1.13.6/date-1.5.1/fh-3.4.0/r-2.5.0/sp-2.2.0/datatables.min.js">
@@ -65,12 +65,22 @@
             });
         }
         if ($('#editor').length) {
+            var editor;
             ClassicEditor.create(document.querySelector('#editor'), {
                 toolbar: []
+            }).then(newEditor => {
+                editor = newEditor;
             });
+        }
+        if ($('#editor2').length) {
+            var editor2;
             ClassicEditor.create(document.querySelector('#editor2'), {
                 toolbar: []
+            }).then(newEditor2 => {
+                editor2 = newEditor2;
             });
+        }
+        if ($('#editor-bullet').length) {
             ClassicEditor.create(document.querySelector('#editor-bullet'), {
                 toolbar: ['bulletedList', ]
             });
@@ -78,6 +88,7 @@
     });
     // start signature
     if ($('#signature-pad-pasien').length) {
+        var signPatient = false;
         var canvas = document.getElementById('signature-pad-pasien');
         var signaturePad = new SignaturePad(canvas, {
             backgroundColor: 'rgba(255, 255, 255, 0)',
@@ -89,14 +100,14 @@
         document.getElementById('save-pasien').addEventListener('click', function(event) {
             if (signaturePad.isEmpty()) {
                 swal("Butuh tanda tangan pasien.");
-            } else if (signaturePad2.isEmpty()) {
-                swal("Butuh tanda tangan Wali.");
             } else {
+                signPatient = true;
                 var dataURL = signaturePad.toDataURL();
                 document.getElementById('signed-pasien').value = dataURL;
             }
         });
 
+        var signWali = false;
         var signaturePad2 = new SignaturePad(document.getElementById('signature-pad-wali'), {
             backgroundColor: 'rgba(255, 255, 255, 0)',
             penColor: 'rgb(0, 0, 0)'
@@ -108,11 +119,13 @@
             if (signaturePad.isEmpty()) {
                 swal("Butuh tanda tangan wali.");
             } else {
-                var dataURL = signaturePad.toDataURL();
+                signWali = true;
+                var dataURL = signaturePad2.toDataURL();
                 document.getElementById('signed-wali').value = dataURL;
             }
         });
 
+        var signPetugas = false;
         var signaturePad3 = new SignaturePad(document.getElementById('signature-pad-petugas'), {
             backgroundColor: 'rgba(255, 255, 255, 0)',
             penColor: 'rgb(0, 0, 0)'
@@ -122,14 +135,24 @@
         });
         document.getElementById('save-petugas').addEventListener('click', function(event) {
             if (signaturePad.isEmpty()) {
-                swal("Butuh tanda tangan petugas.");
+                swal("Butuh tanda tangan pasien.");
+            } else if (signaturePad2.isEmpty()) {
+                swal("Butuh tanda tangan Wali.");
             } else {
-                var dataURL = signaturePad.toDataURL();
+                signPetugas = true;
+                var dataURL = signaturePad3.toDataURL();
                 document.getElementById('signed-petugas').value = dataURL;
             }
         });
 
-
+        function cekSign(e) {
+            e.preventDefault();
+            if (signPatient === false && signWali === false && signPetugas === false){
+                swal("Silahkan klik simpan tanda tangan untuk menyimpan tanda tangan pasien, wali, dan petugas.");
+            }else{
+                $('form').submit();
+            }
+        }
     }
 
 
@@ -200,6 +223,51 @@
 
                 }
             });
+    }
+
+    function fillPasienWali(elem) {
+        // write ajax to get data from ajax-pasien-wali
+        $.ajax({
+            url: "<?=routes('ajax-pasien-wali')?>",
+            type: "POST",
+            data: {
+                id: elem.value
+            },
+            success: function(result) {
+                var data = JSON.parse(result);
+
+                if (result.status == 'failed') {
+                    ClassicEditor.create(document.querySelector('#editor-pasien'), {
+                        toolbar: []
+                    });
+                    ClassicEditor.create(document.querySelector('#editor-wali'), {
+                        toolbar: []
+                    });
+                } else {
+                    // set data to input
+                    $('#nama-pasien').val(data.nama_pasien);
+                    $("#sex").select2("val", data.jenis_kelamin);
+                    $('#tempat-lahir').val(data.tempat_lahir);
+                    $('#datepicker').val(data.tanggal_lahir);
+                    $('#phone-pasien').val(data.no_telp_pasien);
+                    $('#nama-wali').val(data.nama_wali);
+                    $('#alamat-wali').val(data.alamat_wali);
+                    $('#phone-wali').val(data.no_telp_wali);
+                    $("#relation").select2("val", data.hubungan_wali);
+                    ClassicEditor.create(document.querySelector('#editor-pasien'), {
+                        toolbar: []
+                    }).then(editor => {
+                        editor.setData(data.alamat_pasien);
+                    });
+                    ClassicEditor.create(document.querySelector('#editor-wali'), {
+                        toolbar: []
+                    }).then(editor => {
+                        editor.setData(data.alamat_wali);
+                    });
+                }
+
+            },
+        });
     }
     </script>
 </footer>

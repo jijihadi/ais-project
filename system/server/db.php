@@ -47,6 +47,22 @@ function find($table, $where = null)
     return $data;
 }
 
+function findLatest($table, $where = null)
+{
+    global $db;
+    $sql = "SELECT * FROM $table";
+    if ($where != null) {
+        $sql .= " WHERE $where";
+    }
+    $sql .= " ORDER BY id DESC LIMIT 1";
+    $result = $db->query($sql);
+    $data = [];
+    if ($result->num_rows > 0) {
+        $data = $result->fetch_assoc();
+    }
+    return $data;
+}
+
 // function to get single data from database
 function one($table, $where = null)
 {

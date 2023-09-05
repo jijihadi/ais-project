@@ -50,7 +50,7 @@ $formdata = getSessionData('form');
 }
 
 .button-container {
-    padding-left: 39%;
+    padding-left: 30%;
 }
 </style>
 <div class="container-scroller">
@@ -118,6 +118,7 @@ $formdata = getSessionData('form');
                                     <input type="hidden" id="signed-pasien" name="signed-pasien" value="">
                                     <div class="button-container">
                                         <button class="btn btn-sm btn-success" type="button"
+                                            onclick="$(this).addClass(['btn-white', 'text-white']).removeClass('btn-success')"
                                             id="save-pasien">Simpan</button>
                                         <button class="btn btn-sm btn-primary" type="button"
                                             id="clear-pasien">Clear</button>
@@ -141,6 +142,7 @@ $formdata = getSessionData('form');
                                     <input type="hidden" id="signed-wali" name="signed-wali" value="">
                                     <div class="button-container">
                                         <button class="btn btn-sm btn-success" type="button"
+                                            onclick="$(this).addClass(['btn-white', 'text-white']).removeClass('btn-success')"
                                             id="save-wali">Simpan</button>
                                         <button class="btn btn-sm btn-primary" type="button"
                                             id="clear-wali">Clear</button>
@@ -149,7 +151,7 @@ $formdata = getSessionData('form');
                                 <div class="form-group my-3">
                                     <label class="form-check-label"><b>Tanda tangan Petugas</b></label>
                                     <div>
-                                    <?php
+                                        <?php
                                     // get user data from form data session
                                     $employee = one('employees', $formdata['employee_id']);
                                     echo "<p>$employee[front_title] $employee[name] $employee[back_title]</p>";
@@ -165,14 +167,17 @@ $formdata = getSessionData('form');
                                     <input type="hidden" id="signed-petugas" name="signed-petugas" value="">
                                     <div class="button-container">
                                         <button class="btn btn-sm btn-success" type="button"
+                                            onclick="$(this).addClass(['btn-white', 'text-white']).removeClass('btn-success')"
                                             id="save-petugas">Simpan</button>
                                         <button class="btn btn-sm btn-primary" type="button"
                                             id="clear-petugas">Clear</button>
                                     </div>
                                 </div>
 
-                                <button action="<?=routes('form/fill/3')?>" class="btn btn-light">Back</button>
-                                <button type="submit" class="btn btn-gradient-primary me-2">Next</button>
+                                <a href="<?=routes('form/fill/3')?>" onclick="this.preventDefault()"
+                                    class="btn btn-light">Back</a>
+                                <button onclick="cekSign(event)" type="submit"
+                                    class="btn btn-gradient-primary me-2">Next</button>
                             </form>
                         </div>
                     </div>

@@ -98,7 +98,7 @@ $terms = all('terms');
                                 <?php 
                                 endforeach;
                                 ?>
-                                <button action="<?=routes('form/fill/2')?>" class="btn btn-light">Back</button>
+                                <a href="<?=routes('form/fill/2')?>" onclick="this.preventDefault()" class="btn btn-light">Back</a>
                                 <button type="submit" class="btn btn-gradient-primary me-2">Next</button>
                             </form>
                         </div>
