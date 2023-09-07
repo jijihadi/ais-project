@@ -59,6 +59,11 @@
         if ($('.my-select2').length) {
             $('.my-select2').select2();
         }
+        if ($('#consentdates').length) {
+                $('#consentdates').on('change', function(e) {
+                    $('#form-consent-date').submit();   
+                });
+            }
         if ($('#datepicker').length) {
             $('#datepicker').flatpickr({
                 dateFormat: "Y-m-d",
@@ -147,9 +152,9 @@
 
         function cekSign(e) {
             e.preventDefault();
-            if (signPatient === false && signWali === false && signPetugas === false){
+            if (signPatient === false && signWali === false && signPetugas === false) {
                 swal("Silahkan klik simpan tanda tangan untuk menyimpan tanda tangan pasien, wali, dan petugas.");
-            }else{
+            } else {
                 $('form').submit();
             }
         }

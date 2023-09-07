@@ -3,18 +3,26 @@
 isLogin();
 
 // get data from database
-$patient = find('patients', 'id='.getUri(6));
-$guardian = find('guardians', 'patient_id='.$patient['id']);
-$consent = findLatest('consents', 'patient_id='.$patient['id']);
-$employee = find('employees', 'id='.$consent['employee_id']);
-$form = find('forms', 'id='.$consent['form_id']);
+$patient = find('patients', 'id=' . getUri(6));
+$guardian = find('guardians', 'patient_id=' . $patient['id']);
+if (!empty($post)) {
+    $consent = findLatest('consents', 'inputdate like "'.$post["consentdate"].'%" and patient_id=' . $patient['id']);
+} else {
+    $consent = findLatest('consents', 'patient_id=' . $patient['id']);
+}
+print_r($consent);
+$employee = find('employees', 'id=' . $consent['employee_id']);
+$form = find('forms', 'id=' . $consent['form_id']);
+
+$consentDate = all('consents', 'patient_id=' . $patient['id']);
 ?>
 
 <style>
-    .table th img, .table td img{
-        width: 160px;
-        height: 80px;
-    }
+.table th img,
+.table td img {
+    width: 160px;
+    height: 80px;
+}
 </style>
 <!-- Main body start -->
 <div class="container-scroller">
@@ -42,6 +50,28 @@ $form = find('forms', 'id='.$consent['form_id']);
                     <div class="col-lg-6 col-md-6">
                         <div class="card">
                             <div class="card-body">
+                                <div>
+
+                                    <form id="form-consent-date" method="post" action="<?=routes('form/preview-new', $patient['id'])?>">
+                                        <div class="form-group">
+                                            <?php
+                                                if (!empty($consentDate)) {
+                                                    echo "<form method='post' action='" . routes('form/preview-new', $patient['id']) . "'>";
+                                                    echo "<div class='form-group py-3'>";
+                                                    echo "<select class='form-control my-select2' name='consentdate' id='consentdates'>";
+                                                    echo "<option value='-'>Pilih Tanggal Consent</option>";
+                                                    foreach ($consentDate as $c) {
+                                                        $selected = toDbDate($consent['inputdate']) == toDbDate($c['inputdate']) ? 'selected' : '';
+                                                        echo "<option $selected value='" . toDbDate($c['inputdate']) . "'>" . toIndoDate($c['inputdate']) . "</option>";
+                                                    }
+                                                    echo "</select>";
+                                                    echo "</div>";
+                                                    echo "</form>";
+                                                }
+                                            ?>
+                                        </div>
+                                    </form>
+                                </div>
                                 <h4 class="card-title">Data Submisi General Consent</h4>
                                 <p class="card-description"> milik pasien <?=$patient['name']?></p>
                                 <table class="table table-responsive table-borderless">
@@ -63,7 +93,7 @@ $form = find('forms', 'id='.$consent['form_id']);
                                     <tr>
                                         <td>Tempat Tanggal Lahir</td>
                                         <td>:</td>
-                                        <td><?="$patient[birthplace], ".toIndoDate($patient['birthdate'])?></td>
+                                        <td><?="$patient[birthplace], " . toIndoDate($patient['birthdate'])?></td>
                                     </tr>
                                     <tr>
                                         <td>Alamat</td>
@@ -113,31 +143,31 @@ $form = find('forms', 'id='.$consent['form_id']);
                         <div class="card">
                             <div class="card-body">
                                 <?php
-                                $term = json_decode($form['content'], true);
+                                    $term = json_decode($form['content'], true);
 
-                                foreach ($term as $t) {
-                                    $termData = find('terms', 'id='.$t);
+                                    foreach ($term as $t) {
+                                        $termData = find('terms', 'id=' . $t);
 
-                                    if ($termData['head'] != 'hak-pasien' && $termData['head'] != 'kewajiban-pasien') {
-                                        $contentTerm = $termData['content'];
-                                        echo "<p>$contentTerm</p>";
+                                        if ($termData['head'] != 'hak-pasien' && $termData['head'] != 'kewajiban-pasien') {
+                                            $contentTerm = $termData['content'];
+                                            echo "<p>$contentTerm</p>";
 
-                                        if ($termData['head']=='kuasa-privasi') {
-                                            $verification = json_decode($consent['verification']);
-                                            echo "<div class='form-group'>";
-                                            foreach ($verification as $v) {
-                                                echo '<div class="form-check"  id="verif">';
+                                            if ($termData['head'] == 'kuasa-privasi') {
+                                                $verification = json_decode($consent['verification']);
+                                                echo "<div class='form-group'>";
+                                                foreach ($verification as $v) {
+                                                    echo '<div class="form-check"  id="verif">';
                                                     echo '<label class="form-check-label">';
-                                                    echo '<input type="checkbox" checked class="form-check-input"> '.$v;
+                                                    echo '<input type="checkbox" checked class="form-check-input"> ' . $v;
                                                     echo '<i class="input-helper"></i>';
                                                     echo '</label>';
                                                     echo '</div>';
+                                                }
+                                                echo "</div>";
                                             }
-                                            echo "</div>";
                                         }
                                     }
-                                }
-                                echo "<b>$consent[agree]</b>";
+                                    echo "<b>$consent[agree]</b>";
                                 ?>
                                 <div class="my-3 text-center">
                                     <table class="table table-responsive table-borderless">
@@ -148,13 +178,16 @@ $form = find('forms', 'id='.$consent['form_id']);
                                         </tr>
                                         <tr>
                                             <td>
-                                                <img src='<?= "$baseurl/assets/images/signatures/$consent[patient_sign]"?>' class="sign">
+                                                <img src='<?="$baseurl/assets/images/signatures/$consent[patient_sign]"?>'
+                                                    class="sign">
                                             </td>
                                             <td>
-                                                <img src='<?= "$baseurl/assets/images/signatures/$consent[guardian_sign]"?>' class="sign">
+                                                <img src='<?="$baseurl/assets/images/signatures/$consent[guardian_sign]"?>'
+                                                    class="sign">
                                             </td>
                                             <td>
-                                                <img src='<?= "$baseurl/assets/images/signatures/$consent[employee_sign]"?>' class="sign">
+                                                <img src='<?="$baseurl/assets/images/signatures/$consent[employee_sign]"?>'
+                                                    class="sign">
                                             </td>
                                         </tr>
                                         <tr>

@@ -83,9 +83,17 @@ $guardians = find('guardians', "patient_id = $patients[id]");
                                     <label for="exampleInputPassword4">Hubungan</label>
                                     <select class="form-control my-select2" name="relation">
                                         <option value="-" selected>Pilih hubungan kekeluargaan</option>
-                                        <option <?=isSelected('ayah', $guardians['relation'])?> value="ayah">Ayah</option>
-                                        <option <?=isSelected('ibu', $guardians['relation'])?> value="ibu">Ibu</option>
-                                        <option <?=isSelected('wali', $guardians['relation'])?> value="wali">Wali lainnya</option>
+                                        <option <?=isSelected('Ayah', $guardians['relation'])?> value="Ayah">Ayah</option>
+                                        <option <?=isSelected('Ibu', $guardians['relation'])?> value="Ibu">Ibu</option>
+                                        <option <?=isSelected('Suami', $guardians['relation'])?> value="Suami">Suami</option>
+                                        <option <?=isSelected('Istri', $guardians['relation'])?> value="Istri">Istri</option>
+                                        <option <?=isSelected('Anak', $guardians['relation'])?> value="Anak">Anak</option>
+                                        <option <?=isSelected('Adik', $guardians['relation'])?> value="Adik">Adik</option>
+                                        <option <?=isSelected('Kakak', $guardians['relation'])?> value="Kakak">Kakak</option>
+                                        <option <?=isSelected('Kakek', $guardians['relation'])?> value="Kakek">Kakek</option>
+                                        <option <?=isSelected('Nenek', $guardians['relation'])?> value="Nenek">Nenek</option>
+                                        <option <?=isSelected('Paman', $guardians['relation'])?> value="Paman">Paman</option>
+                                        <option <?=isSelected('Bibi', $guardians['relation'])?> value="Bibi">Bibi</option>
                                     </select>
                                 </div>
                                 <div class="form-group">

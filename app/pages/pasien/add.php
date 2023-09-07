@@ -75,9 +75,17 @@ isLogin();
                                     <label for="exampleInputPassword4">Hubungan</label>
                                     <select class="form-control my-select2" name="relation">
                                         <option value="-" selected>Pilih hubungan kekeluargaan</option>
-                                        <option value="ayah">Ayah</option>
-                                        <option value="ibu">Ibu</option>
-                                        <option value="wali">Wali lainnya</option>
+                                        <option value="Ayah">Ayah</option>
+                                        <option value="Ibu">Ibu</option>
+                                        <option value="Suami">Suami</option>
+                                        <option value="Istri">Istri</option>
+                                        <option value="Anak">Anak</option>
+                                        <option value="Adik">Adik</option>
+                                        <option value="Kakak">Kakak</option>
+                                        <option value="Kakek">Kakek</option>
+                                        <option value="Nenek">Nenek</option>
+                                        <option value="Paman">Paman</option>
+                                        <option value="Bibi">Bibi</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
