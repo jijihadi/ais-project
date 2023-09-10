@@ -105,7 +105,7 @@ $formdata = getSessionData('form');
                                     <div>
                                         <?php
                                     $calls = $formdata['sex']=='L' ? 'Bapak' : 'Ibu';
-                                    echo "<p>$calls $formdata[name]</p>";
+                                    echo "<p>$formdata[name]</p>";
                                     ?>
                                     </div>
                                     <div class="signature-wrapper">
@@ -129,7 +129,7 @@ $formdata = getSessionData('form');
                                     <div>
                                         <?php
                                     $calls = $formdata['relation']=='ayah' ? 'Bapak' : 'Ibu';
-                                    echo "<p>$calls $formdata[guardian_name]</p>";
+                                    echo "<p>$formdata[guardian_name]</p>";
                                     ?>
                                     </div>
                                     <div class="signature-wrapper">
